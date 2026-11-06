@@ -1,0 +1,4 @@
+# Default reviewers for every change.
+*                    @messeb
+/.github/            @messeb
+/docs/GIT_FLOW.md    @messeb

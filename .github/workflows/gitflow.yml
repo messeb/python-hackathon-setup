@@ -1,0 +1,85 @@
+# Git Flow guardrails for pull requests (see docs/GIT_FLOW.md):
+#   * source → target branch combinations are enforced
+#   * release/hotfix PRs into main must carry matching versions + a CHANGELOG entry
+#   * PR titles must follow Conventional Commits (they become the squash commit message)
+name: Git Flow
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gitflow-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  branch-rules:
+    name: Git Flow rules
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Validate source → target branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          semver='[0-9]+\.[0-9]+\.[0-9]+'
+          topic='[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*'
+          ok()   { echo "✅ '$HEAD_REF' → '$BASE_REF' follows Git Flow."; exit 0; }
+          fail() { echo "::error title=Git Flow violation::$1"; exit 1; }
+
+          case "$BASE_REF" in
+            main)
+              [[ "$HEAD_REF" =~ ^(release|hotfix)/${semver}$ ]] && ok
+              fail "Only release/X.Y.Z or hotfix/X.Y.Z may be merged into main (got '$HEAD_REF')." ;;
+            develop)
+              [[ "$HEAD_REF" =~ ^(feature|bugfix|chore|docs|refactor|test|ci)/${topic}$ ]] && ok
+              [[ "$HEAD_REF" =~ ^dependabot/ ]] && ok
+              [[ "$HEAD_REF" == "main" ]] && ok                               # back-merge after a release
+              [[ "$HEAD_REF" =~ ^(release|hotfix)/${semver}$ ]] && ok         # back-merge of RC fixes
+              fail "Branches into develop must be named feature/*, bugfix/*, chore/*, docs/*, refactor/*, test/* or ci/* (got '$HEAD_REF')." ;;
+            release/*|hotfix/*)
+              [[ "$HEAD_REF" =~ ^bugfix/${topic}$ ]] && ok
+              fail "Only bugfix/* branches may target '$BASE_REF' (stabilisation only, no features)." ;;
+            *)
+              fail "Unsupported target '$BASE_REF'. Target develop (features, fixes) or main (release/hotfix)." ;;
+          esac
+
+      - name: Check out PR head
+        if: github.base_ref == 'main'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Release version consistency
+        if: github.base_ref == 'main'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: scripts/check-version.sh "${HEAD_REF#*/}"
+
+  pr-title:
+    name: PR title
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@2252a14e810aa9b85c2d560bd7070c802206ecf6 # v6.1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            refactor
+            docs
+            test
+            build
+            ci
+            chore
+            revert
+            release

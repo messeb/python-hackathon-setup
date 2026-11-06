@@ -1,0 +1,7 @@
+# zizmor (GitHub Actions security linter) configuration.
+rules:
+  cache-poisoning:
+    ignore:
+      # Caches in ci.yml are switched off via `github.ref_type != 'tag'` when CI runs
+      # as part of a release (publish.yml); zizmor cannot evaluate that expression.
+      - ci.yml
