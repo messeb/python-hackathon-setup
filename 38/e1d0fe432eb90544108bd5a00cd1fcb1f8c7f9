@@ -1,0 +1,222 @@
+backend/tests/test_llm.py
+  s_0dfcdb4d28af57::t_0d5955873cea7f 1-70,72-80,82-87
+  s_0dfcdb4d28af57::t_72689a5fb5f405 71
+  s_0dfcdb4d28af57::t_88fe619400cf3f 81,88
+backend/tests/test_llm_providers.py
+  s_0dfcdb4d28af57::t_7563d047ca45f4 32
+  s_0dfcdb4d28af57::t_f976dc7f845609 1-22,24-31,33-64,66-126,128-174
+  s_0dfcdb4d28af57::t_0c2b17dce784bf 65,127
+  s_0dfcdb4d28af57::t_88fe619400cf3f 23
+backend/tests/test_frontend_mount.py
+  s_0dfcdb4d28af57::t_f976dc7f845609 1-37
+frontend/src/__tests__/client.spec.ts
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-28
+frontend/src/stores/chat.ts
+  s_0dfcdb4d28af57::t_54772a2e661066 19-20
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-18,21-51
+.github/dependabot.yml
+  s_0dfcdb4d28af57::t_b1be0ef0d652f6 1-35
+frontend/tsconfig.node.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-28
+.gitignore
+  s_0dfcdb4d28af57::t_2eb14eacfa6907 1-31
+frontend/src/__tests__/chat.spec.ts
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-42
+frontend/src/views/ItemsView.vue
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-67
+backend/src/app/api/routes/ml.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-34
+frontend/package.json
+  s_0dfcdb4d28af57::t_a4ad1f9dfa61c0 3,10-12,14-19,53-54
+  s_0dfcdb4d28af57::t_152aa83757d544 1-2,4-9,13,20-52,55
+frontend/.prettierrc.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-6
+backend/src/app/schemas/ml.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-48
+scripts/check-version.sh
+  s_0dfcdb4d28af57::t_bec26b2806c12f 1-37
+.vscode/extensions.json
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-12
+frontend/src/views/ChatView.vue
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-98
+backend/src/app/api/router.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-8
+frontend/src/router/index.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1-2,5-6,14-16
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 3-4,7-13
+backend/src/app/core/config.py
+  s_0dfcdb4d28af57::t_7c0625db71da67 1-53
+backend/tests/test_items.py
+  s_0dfcdb4d28af57::t_0d5955873cea7f 1-30
+.github/workflows/gitflow.yml
+  s_0dfcdb4d28af57::t_bec26b2806c12f 1-85
+backend/src/app/services/llm/factory.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-19
+scripts/bump-version.sh
+  s_0dfcdb4d28af57::t_bec26b2806c12f 1-13,16-18
+  s_0dfcdb4d28af57::t_c9fbe5567b187b 15
+  s_0dfcdb4d28af57::t_efcb9349fb573e 14
+.github/workflows/ci.yml
+  s_0dfcdb4d28af57::t_bec26b2806c12f 1-35,37-38,41-66,68-69,72-100,103-117,135-138,140-147
+  s_0dfcdb4d28af57::t_aa400539b2263e 36,67
+  s_0dfcdb4d28af57::t_77f3ea80d893c2 118-134,139
+  s_0dfcdb4d28af57::t_894e900e6c9b8e 39-40,70-71,101-102
+backend/.env.example
+  s_0dfcdb4d28af57::t_2eb14eacfa6907 1-21
+backend/src/app/schemas/items.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-21
+backend/src/app/__init__.py
+  s_0dfcdb4d28af57::t_7c0625db71da67 1-8
+.github/CODEOWNERS
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-4
+backend/src/app/services/ml/torch_service.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-73
+LICENSE
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-21
+Makefile
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-54
+frontend/src/views/MlView.vue
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-101
+backend/tests/test_health.py
+  s_0dfcdb4d28af57::t_0d5955873cea7f 1-17
+backend/src/app/api/deps.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-28
+backend/tests/conftest.py
+  s_0dfcdb4d28af57::t_72689a5fb5f405 26-30
+  s_0dfcdb4d28af57::t_0d5955873cea7f 1-13,15-25
+  s_0dfcdb4d28af57::t_88fe619400cf3f 14
+backend/src/app/api/routes/health.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-36
+CHANGELOG.md
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-22
+  s_0dfcdb4d28af57::t_7316a05db7f7a6 23
+README.md
+  s_0dfcdb4d28af57::t_e88721ea07e4d7 1-151
+frontend/src/api/client.ts
+  s_0dfcdb4d28af57::t_d301fa165fcbad 43-44,49
+  s_0dfcdb4d28af57::t_a4ad1f9dfa61c0 1-42,45-48,50-94
+backend/src/app/api/routes/items.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-49
+backend/tests/test_ml.py
+  s_0dfcdb4d28af57::t_0d5955873cea7f 1-39
+backend/src/app/services/llm/openai_client.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-77
+backend/src/app/services/items.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-32
+compose.yaml
+  s_0dfcdb4d28af57::t_2eb14eacfa6907 1-19
+.pre-commit-config.yaml
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-19,21-26,28-45
+  s_0dfcdb4d28af57::t_4209918f751445 20,27
+frontend/src/api/types.ts
+  s_0dfcdb4d28af57::t_a4ad1f9dfa61c0 1-46
+.github/workflows/security.yml
+  s_0dfcdb4d28af57::t_b1be0ef0d652f6 1-58
+frontend/src/App.vue
+  s_0dfcdb4d28af57::t_152aa83757d544 3,12,22,47
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-2,4-11,13-21,23-46,48-53
+backend/src/app/services/ml/__init__.py
+  s_0dfcdb4d28af57::t_4bb2699f18dae1 1-3
+frontend/vite.config.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1-6,9-10,12-14,22-24
+  s_0dfcdb4d28af57::t_a4ad1f9dfa61c0 7-8,11,15-21
+backend/pyproject.toml
+  s_0dfcdb4d28af57::t_88fe619400cf3f 71
+  s_0dfcdb4d28af57::t_4209918f751445 27
+  s_0dfcdb4d28af57::t_72689a5fb5f405 11
+  s_0dfcdb4d28af57::t_c65c553e049ffd 4-10,12-26,28-70,72-81
+  s_0dfcdb4d28af57::t_24ae9abaff920e 1-3
+docs/GIT_FLOW.md
+  s_0dfcdb4d28af57::t_74e9f8eac31be7 1-256
+.github/ISSUE_TEMPLATE/bug_report.yml
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-30
+frontend/tsconfig.vitest.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-19
+frontend/tsconfig.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-14
+frontend/.oxlintrc.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-10
+frontend/tsconfig.app.json
+  s_0dfcdb4d28af57::t_152aa83757d544 1-18
+backend/src/app/services/llm/__init__.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-4
+CONTRIBUTING.md
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-17
+frontend/src/views/HomeView.vue
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-63
+backend/src/app/core/logging.py
+  s_0dfcdb4d28af57::t_7c0625db71da67 1-31
+SECURITY.md
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-21
+.editorconfig
+  s_0dfcdb4d28af57::t_44d73bf822b74e 1-19
+frontend/src/assets.css
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-123
+backend/src/app/api/routes/llm.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-33
+backend/src/app/schemas/llm.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-30
+.dockerignore
+  s_0dfcdb4d28af57::t_2eb14eacfa6907 1-15
+frontend/index.html
+  s_0dfcdb4d28af57::t_152aa83757d544 1,3,9-14
+  s_0dfcdb4d28af57::t_a4ad1f9dfa61c0 2,4-8
+.github/zizmor.yml
+  s_0dfcdb4d28af57::t_aa400539b2263e 1-7
+frontend/vitest.config.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1-14
+frontend/src/__tests__/App.spec.ts
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 1-3,6,9-31
+  s_0dfcdb4d28af57::t_152aa83757d544 4-5,7-8,32-33
+backend/src/app/main.py
+  s_0dfcdb4d28af57::t_f43b1fa1366a6a 1-8,10-78,81-89
+  s_0dfcdb4d28af57::t_0d5955873cea7f 9,79-80
+.github/pull_request_template.md
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-18
+backend/src/app/services/llm/base.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-26
+frontend/src/main.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1,3-13
+  s_0dfcdb4d28af57::t_17b192dd2b21f5 2
+.github/ISSUE_TEMPLATE/feature_request.yml
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-19
+frontend/eslint.config.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1-32
+.github/workflows/publish.yml
+  s_0dfcdb4d28af57::t_b1be0ef0d652f6 1-64,66-120,125-175
+  s_0dfcdb4d28af57::t_894e900e6c9b8e 65,121-124
+.github/ISSUE_TEMPLATE/config.yml
+  s_0dfcdb4d28af57::t_4a3bdcd9fdda61 1-5
+frontend/env.d.ts
+  s_0dfcdb4d28af57::t_152aa83757d544 1
+backend/src/app/services/llm/anthropic_client.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-87
+backend/src/app/services/llm/fake_client.py
+  s_0dfcdb4d28af57::t_15fda637185a3b 1-34
+Dockerfile
+  s_0dfcdb4d28af57::t_2eb14eacfa6907 1-56
+.gitattributes
+  s_0dfcdb4d28af57::t_96b893215648f4 1
+backend/.python-version
+  s_0dfcdb4d28af57::t_ace4638a982ce2 1
+backend/uv.lock
+  s_0dfcdb4d28af57::t_d33dc207ed6d9b 1-928
+frontend/pnpm-lock.yaml
+  s_0dfcdb4d28af57::t_f175f29b897359 1-4067
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "38e1d0fe432eb90544108bd5a00cd1fcb1f8c7f9",
+  "prompts": {},
+  "sessions": {
+    "s_0dfcdb4d28af57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "874c095d-b3a1-461e-b5d4-68a94bc6c7d1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Sebastian Messingfeld <sebastian@messeb.com>"
+    }
+  }
+}
