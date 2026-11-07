@@ -201,7 +201,7 @@ gh pr create --base develop --head main --title "chore(release): back-merge 0.2.
   --body "Brings release commits and RC fixes back to develop."
 ```
 
-Merge it with a **merge commit**. GitHub deletes the release branch on merge, and the tag keeps the history.
+Merge it with a **merge commit**. The `release/X.Y.Z` branch is **kept**: the ruleset protects release and hotfix branches from deletion, so they remain an audit trail next to their tags.
 
 ## 7. Hotfix (urgent production fix)
 
