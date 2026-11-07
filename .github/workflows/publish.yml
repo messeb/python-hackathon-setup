@@ -1,0 +1,175 @@
+# Delivery: build, sign and push the container image to GHCR, then cut a GitHub Release.
+#
+#   push to develop        → ghcr.io/<owner>/<repo>:develop, :sha-<short>          (edge)
+#   tag vX.Y.Z-rc.N        → :X.Y.Z-rc.N + GitHub pre-release                       (release candidate)
+#   tag vX.Y.Z (on main)   → :X.Y.Z, :X.Y, :X, :latest + GitHub release             (production)
+name: Publish
+
+on:
+  push:
+    branches: [develop]
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate release tag
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.tag.outputs.version }}
+      prerelease: ${{ steps.tag.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check tag format, versions and source branch
+        id: tag
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          fail() { echo "::error title=Invalid release tag::$1"; exit 1; }
+          [[ "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+)(-rc\.([0-9]+))?$ ]] \
+            || fail "'$TAG' must be vX.Y.Z or vX.Y.Z-rc.N"
+          version="${BASH_REMATCH[1]}"
+          rc="${BASH_REMATCH[3]}"
+
+          scripts/check-version.sh "$version"
+
+          sha="$(git rev-parse HEAD)"
+          if [[ -z "$rc" ]]; then
+            git merge-base --is-ancestor "$sha" origin/main \
+              || fail "Production tag $TAG must point to a commit on main."
+            prerelease=false
+          else
+            git branch -r --contains "$sha" | grep -qE "origin/(release|hotfix)/${version//./\\.}$" \
+              || fail "RC tag $TAG must point to a commit on release/$version or hotfix/$version."
+            prerelease=true
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+          echo "✅ $TAG → version $version (prerelease=$prerelease)"
+
+  ci:
+    name: CI
+    needs: validate
+    if: ${{ !failure() && !cancelled() }}
+    uses: ./.github/workflows/ci.yml # zizmor: ignore[self-repository]
+
+  image:
+    name: Container image
+    needs: [validate, ci]
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+    outputs:
+      image: ${{ steps.name.outputs.image }}
+      digest: ${{ steps.build.outputs.digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Image name (lowercase)
+        id: name
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tags and OCI labels
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ${{ steps.name.outputs.image }}
+          # semver patterns skip {{major}}.{{minor}}/{{major}} and `latest` for pre-releases.
+          tags: |
+            type=raw,value=develop,enable=${{ github.ref == 'refs/heads/develop' }}
+            type=sha,format=short,prefix=sha-
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
+          flavor: latest=auto
+          labels: |
+            org.opencontainers.image.title=${{ github.event.repository.name }}
+            org.opencontainers.image.description=FastAPI + PyTorch + LLM backend with Vue frontend
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          push: true
+          platforms: ${{ github.ref_type == 'tag' && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          # Edge builds reuse the cache; release builds are built from scratch.
+          cache-from: ${{ github.ref_type != 'tag' && 'type=gha' || '' }}
+          cache-to: ${{ github.ref_type != 'tag' && 'type=gha,mode=max' || '' }}
+          no-cache: ${{ github.ref_type == 'tag' }}
+          provenance: mode=max
+          sbom: true
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-name: ${{ steps.name.outputs.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+
+  release:
+    name: GitHub release
+    needs: [validate, image]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ needs.validate.outputs.version }}
+          PRERELEASE: ${{ needs.validate.outputs.prerelease }}
+          IMAGE: ${{ needs.image.outputs.image }}
+          DIGEST: ${{ needs.image.outputs.digest }}
+        run: |
+          # Release notes = the version's CHANGELOG section + how to pull the image.
+          awk -v v="$VERSION" '
+            $0 ~ "^## \\[" v "\\]" { found = 1; next }
+            found && /^## \[/       { exit }
+            found                   { print }
+          ' CHANGELOG.md > notes.md
+          {
+            echo
+            echo "### Container image"
+            echo '```bash'
+            echo "docker pull ${IMAGE}:${TAG#v}"
+            echo '```'
+            echo "Digest: \`${DIGEST}\`"
+          } >> notes.md
+
+          if [[ "$PRERELEASE" == "true" ]]; then
+            flags=(--prerelease --title "$TAG (release candidate)")
+          else
+            flags=(--latest --title "$TAG")
+          fi
+          gh release create "$TAG" --verify-tag --notes-file notes.md --generate-notes "${flags[@]}"

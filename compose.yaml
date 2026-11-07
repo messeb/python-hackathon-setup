@@ -1,0 +1,19 @@
+# Production-like local run of the container image:  docker compose up --build
+services:
+  app:
+    build: .
+    image: hackathon-app:local
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENVIRONMENT: staging
+      APP_LLM_PROVIDER: ${APP_LLM_PROVIDER:-fake}
+      APP_LLM_MODEL: ${APP_LLM_MODEL:-claude-opus-5-5}
+      APP_ANTHROPIC_API_KEY: ${APP_ANTHROPIC_API_KEY:-}
+      APP_OPENAI_BASE_URL: ${APP_OPENAI_BASE_URL:-}
+      APP_OPENAI_API_KEY: ${APP_OPENAI_API_KEY:-}
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true

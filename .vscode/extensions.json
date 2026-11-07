@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "charliermarsh.ruff",
+    "ms-python.python",
+    "ms-python.mypy-type-checker",
+    "Vue.volar",
+    "dbaeumer.vscode-eslint",
+    "oxc.oxc-vscode",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig"
+  ]
+}
