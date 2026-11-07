@@ -1,0 +1,19 @@
+CHANGELOG.md
+  s_0dfcdb4d28af57::t_68399101c0fcb9 9,25-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6224bf643da71c1a01dbe385edf10803bc145791",
+  "prompts": {},
+  "sessions": {
+    "s_0dfcdb4d28af57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "874c095d-b3a1-461e-b5d4-68a94bc6c7d1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Sebastian Messingfeld <sebastian@messeb.com>"
+    }
+  }
+}
