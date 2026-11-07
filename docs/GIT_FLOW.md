@@ -231,7 +231,7 @@ That way the next release does not regress the fix.
 | Ruleset **`main`** | GitHub | PR required (1 approval, conversations resolved), status checks `CI passed` / `Git Flow rules` / `PR title` (branch must be up to date), no force-push, no deletion, merge-commit only |
 | Ruleset **`develop`** | GitHub | PR required (1 approval), same status checks, no force-push, no deletion, squash or merge |
 | Ruleset **`release & hotfix branches`** | GitHub | no force-push, no deletion |
-| Ruleset **`release tags`** | GitHub | `v*` tags can only be created by maintainers, and can never be moved or deleted |
+| Ruleset **`release tags`** | GitHub | `v*` tags can only be created, moved or deleted by admins (every bypass is audited); everyone else is blocked |
 | `Git Flow rules` | `.github/workflows/gitflow.yml` | Allowed source → target combinations (table in §1) and version consistency for PRs into `main` |
 | `PR title` | `.github/workflows/gitflow.yml` | Conventional Commit PR titles |
 | `CI passed` | `.github/workflows/ci.yml` | ruff lint + format, mypy `--strict`, pytest (≥ 85 % coverage), oxlint + eslint, prettier, vue-tsc, vitest, Vite build, Docker build + smoke test, actionlint + zizmor |
