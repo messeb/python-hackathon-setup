@@ -6,9 +6,7 @@ adheres to [Semantic Versioning](https://semver.org/). Release flow: [docs/GIT_F
 
 ## [Unreleased]
 
-### Security
-
-- Pin patched `minimatch` (GHSA-g3hv-75wg-m249) and `glob` (GHSA-3g3m-2fjr-6pw4) in the frontend toolchain via pnpm overrides.
+## [0.1.0] - 2026-11-07
 
 ### Added
 
@@ -24,4 +22,9 @@ adheres to [Semantic Versioning](https://semver.org/). Release flow: [docs/GIT_F
   CodeQL, dependency review, Dependabot, and GHCR publishing with SBOM, provenance and attestations.
 - Release documentation for feature, bugfix, RC, production and hotfix flows.
 
-[Unreleased]: https://github.com/messeb/python-hackathon-setup/commits/develop
+### Security
+
+- Pin patched `minimatch` (GHSA-g3hv-75wg-m249) and `glob` (GHSA-3g3m-2fjr-6pw4) in the frontend toolchain via pnpm overrides.
+
+[Unreleased]: https://github.com/messeb/python-hackathon-setup/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/messeb/python-hackathon-setup/releases/tag/v0.1.0
