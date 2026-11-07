@@ -1,0 +1,5 @@
+# pnpm settings for the frontend package.
+overrides:
+  # GHSA-g3hv-75wg-m249 / GHSA-3g3m-2fjr-6pw4: transitive (dev-only) via eslint & js-beautify.
+  minimatch: ">=11.0.1"
+  "js-beautify>glob": ">=14.0.2"

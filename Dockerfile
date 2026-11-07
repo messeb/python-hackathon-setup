@@ -14,7 +14,7 @@ FROM node:${NODE_VERSION}-slim AS frontend
 ARG PNPM_VERSION
 WORKDIR /src
 RUN npm install --global --no-fund --no-audit "pnpm@${PNPM_VERSION}"
-COPY frontend/package.json frontend/pnpm-lock.yaml ./
+COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
     pnpm install --frozen-lockfile
 COPY frontend/ ./

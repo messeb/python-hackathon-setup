@@ -6,6 +6,10 @@ adheres to [Semantic Versioning](https://semver.org/). Release flow: [docs/GIT_F
 
 ## [Unreleased]
 
+### Security
+
+- Pin patched `minimatch` (GHSA-g3hv-75wg-m249) and `glob` (GHSA-3g3m-2fjr-6pw4) in the frontend toolchain via pnpm overrides.
+
 ### Added
 
 - FastAPI backend managed by uv (Python 3.13) with an app factory, typed settings and JSON logging.
