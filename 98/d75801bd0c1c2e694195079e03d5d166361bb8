@@ -1,0 +1,19 @@
+docs/GIT_FLOW.md
+  s_0dfcdb4d28af57::t_adb45e4ef8cd40 234
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "98d75801bd0c1c2e694195079e03d5d166361bb8",
+  "prompts": {},
+  "sessions": {
+    "s_0dfcdb4d28af57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "874c095d-b3a1-461e-b5d4-68a94bc6c7d1",
+        "model": "unknown"
+      },
+      "human_author": "Sebastian Messingfeld <sebastian@messeb.com>"
+    }
+  }
+}
