@@ -6,10 +6,10 @@ license = "MIT"
 authors = [{ name = "Sebastian Messingfeld", email = "sebastian@messeb.com" }]
 requires-python = ">=3.13,<3.14"
 dependencies = [
-    "anthropic>=0.70",
-    "fastapi>=0.120",
+    "anthropic>=2.8.0",
+    "fastapi>=0.162.5",
     "numpy>=2.5.4",
-    "openai>=2.0",
+    "openai>=3.50.0",
     "pydantic-settings>=2.10",
     "torch>=2.9",
     "uvicorn[standard]>=0.38",
@@ -24,7 +24,7 @@ dev = [
     "mypy>=1.18",
     "pytest>=8.4",
     "pytest-cov>=7.0",
-    "ruff>=0.17",
+    "ruff>=0.17.5",
 ]
 
 [build-system]
